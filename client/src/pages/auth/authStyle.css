@@ -1,0 +1,39 @@
+.authContainer {
+    display: flex;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)) center center / cover no-repeat, url(../../_metronic/assets/images/overlay_2.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column !important;
+    justify-content: center;
+}
+
+.authPage .MuiButton-contained {
+    padding: 10px 0;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.forgotPassPage {
+    min-height: 100vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.innerContainer {
+    max-width: 400px
+}
+
+.innerContainer button.MuiButton-contained {
+    margin: 1.5rem 0 !important;
+}
