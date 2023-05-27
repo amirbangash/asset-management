@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Typography, TextField, Link } from '@mui/material'
-import authMainImage from '../../../_metronic/assets/images/loginImg.png'
-import '../authStyle.css'
+import authMainImage from '../../../assets/images/loginImg.png'
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { successToast, errorToast } from '../../../utilities/toastify';
 import CommonButton from '../../../components/Common/CommonButton';
 import { login } from '../../../store/auth/actions';
+import '../authStyle.css'
 
 const Login = () => {
-    // test comments
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const location = useLocation()
@@ -54,26 +53,27 @@ const Login = () => {
         return <Navigate to='/dashboard' />
     }
 
+    const newLocal = <img src={authMainImage} alt='Auth Main Image' />;
     return (
         <Grid container className='authPage' >
             {/* Left Side */}
             <Grid item md={8} className='authContainer'>
-                <Typography variant='h4' maxWidth={500} fontWeight='700' textAlign='center' mb={5} >
+                <Typography variant='h3' maxWidth={500} fontWeight='700' textAlign='center' mb={5} >
                     Hi, Welcome Back
                 </Typography>
-                <img src={authMainImage} alt='Auth Main Image' />
+                {newLocal}
             </Grid>
             {/* Right Side */}
             <Grid item md={4} sm={12} className='formContainer' padding={6}>
-                <Typography variant='h4' fontWeight={600} mb={1}>
+                <Typography variant='h3' mb={1}>
                     Sign in to Dashboard
                 </Typography>
-                <Typography variant='h6' mb={4} fontSize={14}>New user?
-                    <Link underline='hover' ml={1} onClick={() => navigate('/register')}>
+                <Typography variant='subtitle1' >New user?
+                    <Link underline='hover' ml={0.5} onClick={() => navigate('/register')}>
                         Create an account
                     </Link>
                 </Typography>
-                <Grid container spacing={3} component='form' onSubmit={handleSubmit}>
+                <Grid container spacing={3} mt={3} component='form' onSubmit={handleSubmit}>
                     <Grid item xs={12}>
                         <TextField fullWidth color='Dark' label='Email address' name='email' value={userCreds.email} onChange={handleChange} />
                     </Grid>
@@ -82,7 +82,7 @@ const Login = () => {
                     </Grid>
                     <Grid item xs={12} textAlign='right'>
                         <Link variant='link' underline='always' fontSize={14} onClick={() => navigate('/reset-password')}>
-                            Forgot Password ?
+                            <Typography color='gray' variant='body1'>Forgot Password ?</Typography>
                         </Link>
                     </Grid>
                     <Grid item xs={12}>

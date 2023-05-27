@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Grid, Typography, TextField, Link, Button } from '@mui/material'
-import authMainImage from '../../../_metronic/assets/images/loginImg.png'
-import '../authStyle.css'
+import { Grid, Typography, Link } from '@mui/material'
+import authMainImage from '../../../assets/images/loginImg.png'
+// import '../authStyle.css'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { login, register } from '../../../store/auth/actions'
+import { register } from '../../../store/auth/actions'
 import CommonButton from '../../../components/Common/CommonButton'
 import CommonTextField from '../../../components/Common/CommonTextField'
 
@@ -35,17 +35,17 @@ const Register = () => {
         <Grid container className='authPage' >
             {/* Left Side */}
             <Grid item xs={8} className='authContainer'>
-                <Typography variant='h4' maxWidth={500} fontWeight='700' textAlign='center' mb={5} >
+                <Typography variant='h3' maxWidth={500} textAlign='center' mb={5} >
                     Manage the job more effectively with Minimal
                 </Typography>
-                <img src={authMainImage} />
+                <img src={authMainImage} alt='Image' />
             </Grid>
             {/* Right Side */}
             <Grid item xs={4} className='formContainer' padding={6}>
-                <Typography variant='h4' fontWeight={600} mb={1}>
+                <Typography variant='h3' mb={0.5}>
                     Get started.
                 </Typography>
-                <Typography variant='h6' mb={4} fontSize={14}>
+                <Typography variant='subtitle1' mb={4}>
                     Already have an account?
                     <Link underline='hover' ml={1} onClick={() => navigate('/')}>Sign in</Link>
                 </Typography>

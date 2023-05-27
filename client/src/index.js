@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './_metronic/assets/Style/main.css'
+import './assets/Style/main.css'
 import App from './App';
 //reac-toastify css
 import "react-toastify/dist/ReactToastify.css"

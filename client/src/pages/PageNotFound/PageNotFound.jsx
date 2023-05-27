@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
-import { ReactComponent as ErrorPageLogo } from '../../_metronic/assets/svg/errorPage.svg'
+import { ReactComponent as ErrorPageLogo } from '../../assets/svg/errorPage.svg'
 import CommonButton from '../../components/Common/CommonButton'
 import { Link } from 'react-router-dom'
 import './PageNotFound.css'

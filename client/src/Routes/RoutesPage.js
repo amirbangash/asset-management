@@ -1,12 +1,12 @@
 import React from 'react'
 import { Routes, Route, useNavigate } from "react-router-dom"
-import Login from './auth/Login/Login'
-import Register from './auth/Register/Register'
-import Dashboard from './dashboard/Dashboard'
-import ForgotPassword from './auth/ForgotPassword/ForgotPassword'
+import Login from '../auth/Login/Login'
+import Register from '../auth/Register/Register'
+import Dashboard from '../dashboard/Dashboard'
+import ForgotPassword from '../auth/ForgotPassword/ForgotPassword'
 import Layout from './Layout'
 import RequiredAuth from './RequiredAuth'
-import PageNotFound from './PageNotFound/PageNotFound'
+import PageNotFound from '../PageNotFound/PageNotFound'
 
 const RoutesPage = () => {
     

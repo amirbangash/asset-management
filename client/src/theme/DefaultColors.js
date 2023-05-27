@@ -1,4 +1,6 @@
 import { createTheme } from '@mui/material/styles';
+import { shadows } from './Shadows';
+import typography from './Typography';
 
 export const dashboardTheme = createTheme({
     palette: {
@@ -34,4 +36,6 @@ export const dashboardTheme = createTheme({
             contrastText: '#fff'
         }        
     },
+    typography,
+    shadows
 });

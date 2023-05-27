@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
-import { ReactComponent as ForgotPasswordLogo } from '../../../_metronic/assets/svg/forgot.svg'
+import { ReactComponent as ForgotPasswordLogo } from '../../../assets/svg/forgot.svg'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Link } from 'react-router-dom'
 import CommonButton from '../../../components/Common/CommonButton';
