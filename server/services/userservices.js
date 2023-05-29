@@ -23,6 +23,16 @@ async function createUser(body) {
     throw new Error(error.message);
   }
 }
+async function completeProfile(body) {
+  try {
+    const { email } = body
+    const user = await User.updateOne({ email }, { new: true })
+    return user
+
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
 
 async function getUser(email, password) {
   try {
@@ -79,7 +89,6 @@ async function forgetPassword(body) {
   if (!user) {
     // return JSON.stringify('This email does not exist')
     return { message: 'This email does not exist' };
-
   }
   // create transporter
   let transporter = nodemailer.createTransport({
@@ -122,4 +131,4 @@ async function getAllUser(page, limit) {
   }
 }
 
-export { createUser, updateUser, getUser, getAllUser, updatePassword, forgetPassword };
+export { createUser, updateUser, getUser, getAllUser, updatePassword, forgetPassword, completeProfile };

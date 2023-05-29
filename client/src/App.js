@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import RoutesPage from './pages/Routes/RoutesPage';
+import RoutesPage from './Routes/RoutesPage';
 import { Provider } from "react-redux";
 import { ThemeProvider } from '@emotion/react';
 import { dashboardTheme } from './theme/DefaultColors';

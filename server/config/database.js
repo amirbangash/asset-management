@@ -20,4 +20,4 @@ const mongoose = require('mongoose');
 //       process.exit(1);
 //     });
 // };
-mongoose.connect('mongodb://localhost:27017/company');
+mongoose.connect('mongodb://localhost/company');

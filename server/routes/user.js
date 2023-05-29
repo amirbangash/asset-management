@@ -10,107 +10,19 @@ import fs from 'fs';
 import { User } from '../model/user.js';
 import { verifyToken } from '../middleware/auth.js';
 import {
-  createUser,
-  updateUser,
-  getUser,
-  getAllUser,
-  updatePassword,
-  forgetPassword
-  // updatePassword
-} from '../services/userservices.js';
-
-
-
-
+    userRegistation, createUserProfile,
+    userLogin, seeAllUser,
+    updateUserPassword
+} from '../controllers/user.js';
 const userRouter = express.Router();
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, '../uploads');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-const uploads = multer({ storage });
-const upload = multer({ storage });
+userRouter.post('/signup', userRegistation)
+userRouter.put('/create-profile', createUserProfile)
+userRouter.post('/login', userLogin)
+userRouter.get('/get-all-Users', verifyToken, seeAllUser)
+// userRouter.put('/update-profile', updateUserProfile)
+userRouter.put('/update-password', verifyToken, updateUserPassword)
+// userRouter.put('/forget-password', UserForgetPassword)
 
-const result = [];
-const readCSVFile = (csvFilePath) => {
-  return new Promise((resolve, reject) => {
-    const result = [];
-    fs.createReadStream(csvFilePath)
-      .pipe(csv())
-      .on('data', (data) => result.push(data))
-      .on('end', () => {
-        console.log('Result:', result);
-        resolve(result);
-      })
-      .on('error', (error) => reject(error));
-  });
-};
-
-userRouter.post('/signup', async (req, res) => {
-  try {
-    const { body } = req;
-    const hashedPassword = await bcrypt.hash(body.password, 10);
-    body.password = hashedPassword;
-    const user = await createUser(body);
-    return res.status(201).json({ user: 'Successfully registered' });
-  } catch (error) {
-    return res.status(400).json({ error: error.message });
-  }
-});
-
-userRouter.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const { user, token } = await getUser(email, password);
-    console.log("res", user);
-    if (user) {
-      return res
-        .status(200)
-        .json({ user: 'Successfully logged In..', token });
-    } else {
-      return res.status(400).json({ user: 'Invalid Email or Password' });
-    }
-  } catch (error) {
-    return res.status(404).json({ error: error.message });
-  }
-});
-
-userRouter.put('/updateProfile', async (req, res) => {
-  try {
-    const { body } = req;
-    const user = await updateUser(body);
-    return res.status(201).json({ user: "Profile updated successfully" });
-  } catch (error) {
-    // handle error
-  }
-});
-
-userRouter.put('/updatePassword', verifyToken, async (req, res) => {
-  try {
-    const { id } = req.user;
-    const { newPassword, confirm } = req.body
-    if (newPassword === confirm) {
-      const update = await updatePassword(newPassword, id);
-      return res.status(201).json(update)
-    }
-  } catch (error) {
-    return res.status(400).json({ error: error.message });
-  }
-});
-userRouter.put('/forgetPassword', async (req, res) => {
-  try {
-    const { body } = req
-    const update = await forgetPassword(body)
-    console.log(update)
-    return res.status(201).json(update)
-  } catch (error) {
-    return res.status(400).json({ error: error.message })
-
-  }
-})
 
 export default userRouter

@@ -1,8 +1,16 @@
 import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
-  name: {
+  firstName: {
     type: String,
-    required: false,
+    // required: true,
+    default: null,
+    match: /^[a-zA-Z0-9_-]{3,16}$/
+
+  },
+  lastName: {
+    type: String,
+    default: null,
+    // required: true,
     match: /^[a-zA-Z0-9_-]{3,16}$/
 
   },
@@ -16,27 +24,11 @@ const userSchema = new mongoose.Schema({
       'Please enter a valid email',
     ],
   },
-  role: {
-    type: String,
-    default: "user",
-    enum: ['user', 'admin']
-  },
-  phoneNo: {
-    type: Number,
-  },
   password: {
     type: String,
     required: true,
     default: "admin",
     minLength: 8,
-
-
-  },
-
-  level: {
-    type: String,
-    default: null,
-    enum: [0, 1, 2, 3, 4, 5]
   },
   cnic: {
     type: Number,
@@ -45,6 +37,22 @@ const userSchema = new mongoose.Schema({
     maxLength: 13,
     default: null,
   },
+  role: {
+    type: String,
+    default: "user",
+    enum: ['user', 'admin']
+  },
+  phoneNo: {
+    type: Number,
+    default: null
+  },
+
+  level: {
+    type: String,
+    default: 0,
+    enum: [0, 1, 2, 3, 4, 5]
+  },
+
   team: {
     type: String,
     default: 'web development',
@@ -59,9 +67,6 @@ const userSchema = new mongoose.Schema({
     default: null,
   },
 });
-userSchema.method({
-  async authenticate(password) {
-    return bcrypt.compare(password, this.hash_password);
-  },
-});
-export const User = mongoose.model('users', userSchema); //This line
+
+const User = mongoose.model('users', userSchema); //This line
+export { User }
