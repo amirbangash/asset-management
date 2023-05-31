@@ -7,5 +7,5 @@ export const loginUser = userCredentials => {
 
 //register
 export const registerUser = userData => {
-	return API.post("user/register", userData)
+	return API.post("user/signup", userData)
 }

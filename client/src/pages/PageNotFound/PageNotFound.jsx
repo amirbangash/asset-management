@@ -12,7 +12,7 @@ const PageNotFound = () => {
                 <Typography align='center' variant='h4' fontWeight={700} >
                     Sorry, page not found!
                 </Typography>
-                <Typography variant='h6' fontSize={16} marginY={2} lineHeight={1.2}>
+                <Typography variant='body1' marginBottom={2} lineHeight={1.2}>
                     Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be sure to check your spelling.
                 </Typography>
                 <ErrorPageLogo />

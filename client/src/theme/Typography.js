@@ -33,7 +33,7 @@ const typography = {
         textTransform: 'uppercase',
         fontWeight: 700,
         fontSize: '15px',
-        lineHeight: '24px'
+        lineHeight: '34px',
     },
     body1: {
         fontSize: '16px',

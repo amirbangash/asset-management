@@ -1,5 +1,5 @@
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material'
-import { ReactComponent as Logo } from '../../assets/svg/Logo.svg'
+import { ReactComponent as Logo } from '../../assets/logos/Logo.svg'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'

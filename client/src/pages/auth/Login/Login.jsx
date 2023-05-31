@@ -48,16 +48,16 @@ const Login = () => {
         }
     }, [isLogin])
 
-        
-    if(isAuth?.user) {
+
+    if (isAuth?.user) {
         return <Navigate to='/dashboard' />
     }
 
     const newLocal = <img src={authMainImage} alt='Auth Main Image' />;
     return (
-        <Grid container className='authPage' >
+        <Grid container >
             {/* Left Side */}
-            <Grid item md={8} className='authContainer'>
+            <Grid item md={8} display={{ xs: 'none', md: 'flex' }} className='authContainer'>
                 <Typography variant='h3' maxWidth={500} fontWeight='700' textAlign='center' mb={5} >
                     Hi, Welcome Back
                 </Typography>
