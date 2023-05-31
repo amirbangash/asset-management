@@ -47,8 +47,8 @@ const Profile = () => {
           src={ProfileImg}
           alt={ProfileImg}
           sx={{
-            width: 35,
-            height: 35,
+            width: 45,
+            height: 45,
           }}
         />
       </IconButton>
@@ -88,7 +88,7 @@ const Profile = () => {
           <ListItemText>My Tasks</ListItemText>
         </MenuItem>
         <Box mt={1} py={1} px={2}>
-          <Button to="/auth/login" variant="outlined" color="primary" component={Link} fullWidth>
+          <Button to="/" variant="outlined" color="primary" component={Link} fullWidth>
             Logout
           </Button>
         </Box>

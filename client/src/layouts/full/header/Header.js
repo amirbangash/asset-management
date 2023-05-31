@@ -66,6 +66,9 @@ const Header = (props) => {
         </IconButton>
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
+          <Button variant="contained" size='small' color="primary" target="_blank" href="#">
+            Upgrade to Pro
+          </Button>
           <Profile />
         </Stack>
       </ToolbarStyled>

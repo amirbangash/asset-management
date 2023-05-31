@@ -1,16 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-:root {
-    --primary-color: #00AB55;
-    --secondary-color: #212B36;
-    --hover-color: rgb(0, 123, 85);
-}
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
     font-family: 'Public Sans', sans-serif !important;
 }
 
@@ -23,6 +16,6 @@ img {
     pointer-events: none;
 }
 
-.MuiTextField-root  {
+.MuiTextField-root {
     overflow: initial;
 }
