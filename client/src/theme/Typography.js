@@ -1,4 +1,8 @@
 const typography = {
+    fontFamily: [
+        'Public Sans',
+        'sans-serif'
+    ].join(','),
     h1: {
         fontWeight: 800,
         fontSize: '64px',
@@ -30,10 +34,10 @@ const typography = {
         lineHeight: '28px',
     },
     button: {
-        textTransform: 'uppercase',
+        textTransform: 'capitalize',
         fontWeight: 700,
-        fontSize: '15px',
-        lineHeight: '34px',
+        fontSize: '14px',
+        lineHeight: '24px',
     },
     body1: {
         fontSize: '16px',

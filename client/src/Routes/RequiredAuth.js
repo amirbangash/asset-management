@@ -1,4 +1,5 @@
-import { useLocation, Navigate, Outlet } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
+import BlankLayout from "../layouts/blank/BlankLayout";
 
 const RequiredAuth = () => {
     const auth = JSON.parse(localStorage.getItem('Auth'))
@@ -6,7 +7,7 @@ const RequiredAuth = () => {
 
     return (
         auth?.user
-            ? <Outlet />
+            ? <BlankLayout />
             : <Navigate to='/' state={{ from: location }} replace />
     )
 }

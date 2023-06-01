@@ -5,15 +5,20 @@ import Register from '../pages/auth/Register/Register'
 import Dashboard from '../pages/dashboard/Dashboard'
 import ForgotPassword from '../pages/PageNotFound/PageNotFound'
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
-import Layout from './Layout'
+// import Layout from './Layout'
 import RequiredAuth from './RequiredAuth'
+import FullLayout from '../layouts/full/FullLayout'
+import BlankLayout from '../layouts/blank/BlankLayout'
+
 
 const RoutesPage = () => {
+
+    const auth = JSON.parse(localStorage.getItem('Auth'))
 
 
     return (
         <Routes>
-            <Route path='/' element={<Layout />} >
+            <Route path='/' element={auth?.user ? <FullLayout /> : <BlankLayout />} >
 
                 {/* Public Routes */}
                 <Route path="/" element={<Login />} />

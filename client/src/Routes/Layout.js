@@ -1,19 +1,19 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import FullLayout from '../layouts/full/FullLayout'
+// import React from 'react'
+// import FullLayout from '../layouts/full/FullLayout'
+// import BlankLayout from '../layouts/blank/BlankLayout'
 
-const Layout = () => {
-    const auth = JSON.parse(localStorage.getItem('Auth'))
-    const { user } = auth
+// const Layout = () => {
+//     const auth = JSON.parse(localStorage.getItem('Auth'))
+//     console.log("🚀 ~ file: Layout.js:7 ~ Layout ~ auth:", auth)
 
-    return (
-        <main className='app'>
-            {user
-                ? <FullLayout />
-                : <Outlet />
-            }
-        </main>
-    )
-}
+//     return (
+//         <main className='app'>
+//             {auth?.user
+//                 ? <FullLayout />
+//                 : <BlankLayout />
+//             }
+//         </main>
+//     )
+// }
 
-export default Layout
+// export default Layout
