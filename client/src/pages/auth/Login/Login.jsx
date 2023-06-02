@@ -35,18 +35,18 @@ const Login = () => {
         }
     }
 
-    useEffect(() => {
-        if (isLogin.status === 200) {
-            const isAuthorized = {
-                'user': true,
-                'token': isLogin.data.token
-            }
-            localStorage.setItem('Auth', JSON.stringify(isAuthorized))
-            successToast(isLogin.data.user)
-            navigate(from, { replace: true })
-            navigate('/dashboard')
-        }
-    }, [isLogin])
+    // useEffect(() => {
+    //     if (isLogin.status === 200) {
+    //         const isAuthorized = {
+    //             'user': true,
+    //             'token': isLogin.data.token
+    //         }
+    //         localStorage.setItem('Auth', JSON.stringify(isAuthorized))
+    //         successToast(isLogin.data.user)
+    //         navigate(from, { replace: true })
+    //         navigate('/dashboard')
+    //     }
+    // }, [isLogin])
 
 
     if (isAuth?.user) {

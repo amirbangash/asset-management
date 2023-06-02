@@ -29,12 +29,15 @@ export const login = userData => async dispatch => {
         const res = await loginUser(userData)
         if (res?.status === 200) {
             successToast('User Login Successfully')
-            dispatch(userAction(res))
+            dispatch(userAction(res?.data))
+            localStorage.setItem('Auth', JSON.stringify({
+                user: true,
+                token: res?.data?.token
+            }))
         }
         return res
     } catch (err) {
         const { data, status } = err?.response
-
         if (status === 404 || status === 401) {
             errorToast(data?.Error)
         }

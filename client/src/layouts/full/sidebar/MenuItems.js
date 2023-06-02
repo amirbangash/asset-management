@@ -45,7 +45,7 @@ const Menuitems = [
     id: uniqueId(),
     title: 'Login',
     icon: LoginIcon,
-    href: '/auth/login',
+    href: '/',
   },
   {
     id: uniqueId(),

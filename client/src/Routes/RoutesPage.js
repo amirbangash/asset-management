@@ -5,15 +5,22 @@ import Register from '../pages/auth/Register/Register'
 import Dashboard from '../pages/dashboard/Dashboard'
 import ForgotPassword from '../pages/PageNotFound/PageNotFound'
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
-import Layout from './Layout'
+// import Layout from './Layout'
 import RequiredAuth from './RequiredAuth'
+import FullLayout from '../layouts/full/FullLayout'
+import BlankLayout from '../layouts/blank/BlankLayout'
+import SamplePage from '../pages/sample-page/SamplePage'
+import UpdateProfile from '../pages/UpdateProfile/UpdateProfile'
+
 
 const RoutesPage = () => {
+
+    const auth = JSON.parse(localStorage.getItem('Auth'))
 
 
     return (
         <Routes>
-            <Route path='/' element={<Layout />} >
+            <Route path='/' element={auth?.user ? <FullLayout /> : <BlankLayout />} >
 
                 {/* Public Routes */}
                 <Route path="/" element={<Login />} />
@@ -24,6 +31,8 @@ const RoutesPage = () => {
                 {/* Protected Routes */}
                 <Route element={<RequiredAuth />} >
                     <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="sample-page" element={<SamplePage />} />
+                    <Route path="profile" element={<UpdateProfile />} />
                 </Route>
 
                 {/* Catch All */}

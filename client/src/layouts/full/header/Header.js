@@ -1,6 +1,8 @@
 import React from 'react';
-import { Box, AppBar, Toolbar, styled, Stack, IconButton, Badge, Button } from '@mui/material';
+import { Box, AppBar, Toolbar, styled, Stack, IconButton, Badge } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import PropTypes from 'prop-types';
+import CommonButton from '../../../components/Common/CommonButton'
 
 // components
 import Profile from './Profile';
@@ -66,9 +68,7 @@ const Header = (props) => {
         </IconButton>
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
-          <Button variant="contained" size='small' color="primary" target="_blank" href="#">
-            Upgrade to Pro
-          </Button>
+          <CommonButton variant="contained" size='small' color="primary" buttonText='Create Asset' startIcon={<AddIcon />} />
           <Profile />
         </Stack>
       </ToolbarStyled>

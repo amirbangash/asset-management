@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
   Avatar,
   Box,
@@ -10,16 +11,17 @@ import {
   ListItemIcon,
   ListItemText
 } from '@mui/material';
-
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
-
-// import { IconListCheck, IconMail, IconUser } from '@tabler/icons';
-
 import ProfileImg from '../../../assets/profile/user-1.jpg';
+import { logoutUser } from '../../../store/auth/actions';
 
 const Profile = () => {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const [anchorEl2, setAnchorEl2] = useState(null);
   const handleClick2 = (event) => {
     setAnchorEl2(event.currentTarget);
@@ -27,6 +29,13 @@ const Profile = () => {
   const handleClose2 = () => {
     setAnchorEl2(null);
   };
+
+  const handleLogot = () => {
+    setTimeout(() => {
+      dispatch(logoutUser())
+      navigate('/')
+    }, 300)
+  }
 
   return (
     <Box>
@@ -88,7 +97,7 @@ const Profile = () => {
           <ListItemText>My Tasks</ListItemText>
         </MenuItem>
         <Box mt={1} py={1} px={2}>
-          <Button to="/" variant="outlined" color="primary" component={Link} fullWidth>
+          <Button variant="outlined" color="primary" component={Link} fullWidth onClick={handleLogot}>
             Logout
           </Button>
         </Box>
