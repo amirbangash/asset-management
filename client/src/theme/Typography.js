@@ -37,7 +37,7 @@ const typography = {
         textTransform: 'capitalize',
         fontWeight: 700,
         fontSize: '14px',
-        lineHeight: '24px',
+        lineHeight: '34px',
     },
     body1: {
         fontSize: '16px',

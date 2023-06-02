@@ -1,6 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import { shadows } from './Shadows';
 import typography from './Typography';
+import Button from '@mui/material/Button'
 
 export const dashboardTheme = createTheme({
     palette: {
@@ -34,7 +35,7 @@ export const dashboardTheme = createTheme({
         Dark: {
             main: '#161C24',
             contrastText: '#fff'
-        }        
+        }
     },
     typography,
     shadows

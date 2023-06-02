@@ -9,6 +9,8 @@ import PageNotFound from '../pages/PageNotFound/PageNotFound'
 import RequiredAuth from './RequiredAuth'
 import FullLayout from '../layouts/full/FullLayout'
 import BlankLayout from '../layouts/blank/BlankLayout'
+import SamplePage from '../pages/sample-page/SamplePage'
+import UpdateProfile from '../pages/UpdateProfile/UpdateProfile'
 
 
 const RoutesPage = () => {
@@ -29,6 +31,8 @@ const RoutesPage = () => {
                 {/* Protected Routes */}
                 <Route element={<RequiredAuth />} >
                     <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="sample-page" element={<SamplePage />} />
+                    <Route path="profile" element={<UpdateProfile />} />
                 </Route>
 
                 {/* Catch All */}
