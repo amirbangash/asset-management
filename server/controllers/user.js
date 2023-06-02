@@ -11,7 +11,8 @@ async function userRegistation(req, res) {
         const { body } = req;
         const { email } = body
         const user = await register(body)
-        return res.status(user.statusCode).json({ msg: user.message });
+        return res.status(user.statusCode)
+            .json({ msg: user.message, user: user.userData, error: user.errMessage });
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }

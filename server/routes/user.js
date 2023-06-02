@@ -9,6 +9,8 @@ import fs from 'fs';
 
 import { User } from '../model/user.js';
 import { verifyToken } from '../middleware/auth.js';
+import { validateUserCreate, validateUserProfile } from '../middleware/validation.js';
+
 import {
     userRegistation, createUserProfile,
     userLogin, seeAllUser,
@@ -16,8 +18,8 @@ import {
 } from '../controllers/user.js';
 const userRouter = express.Router();
 
-userRouter.post('/signup', userRegistation)
-userRouter.put('/create-profile', createUserProfile)
+userRouter.post('/signup', validateUserCreate, userRegistation)
+userRouter.put('/create-profile', validateUserProfile, createUserProfile)
 userRouter.post('/login', userLogin)
 userRouter.get('/get-all-Users', verifyToken, seeAllUser)
 // userRouter.put('/update-profile', updateUserProfile)

@@ -22,9 +22,12 @@ async function register(body) {
         const hash = await bcrypt.hash(password, 10);
         body.password = hash;
         const user = await create(body);
-        return { statusCode: 201, message: 'User Registered Successfully' };
+        const data = {
+            email: user.email,
+            cnic: user.cnic,
+        }
+        return { statusCode: 201, userData: data, message: 'User Registered Successfully' };
     } catch (error) {
-        console.log("we have an error in services", error.message)
         throw new Error(error.message);
     }
 }
