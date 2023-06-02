@@ -10,6 +10,9 @@ export const register = userData => async dispatch => {
         if (res.status === 201) {
             successToast(res?.data?.msg)
             dispatch(userAction(res))
+            localStorage.setItem('Auth', JSON.stringify({
+                user: true,
+            }))
         }
         return res
     } catch (err) {

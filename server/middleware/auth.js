@@ -1,36 +1,42 @@
+import jwt from 'jsonwebtoken';
+import { config } from 'dotenv';
+import { blacklistToken, getBlacklistedToken } from '../utils/token.js';
+import lodash from 'lodash'
 
-import jwt from 'jsonwebtoken'
+config();
 
-const createToken = (user) => {
-  const token = jwt.sign(
-    {
-      name: user.name,
-      email: user.email,
-      id: user.id,
-      role: user.role,
-      password: user.password
-    },
-    process.env.TOKEN_KEY,
-    { expiresIn: '8h' }
-  );
-  return token;
-}
 const verifyToken = (req, res, next) => {
-  const token =
-    req.body.token || req.query.token || req.headers['x-access-token'];
-  if (!token) {
-    return res.status(403).send('A token is required for authentication');
-  }
-  try {
+  const { headers } = req;
+  const accessToken = headers.authorization
+    ? headers.authorization.split(' ')[1]
+    : '';
+  (async () => {
+    const token = `'${accessToken}'`
+    const isBlacklisted = await getBlacklistedToken();
+    const stringArray = isBlacklisted.map(obj => Object.values(obj)[0]);
+    const accessTokenExists = stringArray.some(element => element === accessToken);
 
-    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-    req.user = decoded;
-    return next();
-  } catch (err) {
-    console.log("error is ", err)
-    return res.status(401).send('Invalid Token');
-  }
-
+    if (accessTokenExists) {
+      return res.status(400).json({ msg: 'Token Revoked' });
+    }
+    if (accessToken === '') {
+      return res.status(400).json({ msg: 'Bearer Token is required.' });
+    }
+    try {
+      const decoded = jwt.verify(accessToken, process.env.secretKey);
+      req.user = decoded;
+      // console.log()
+      return next();
+    } catch (err) {
+      if (err.name === 'TokenExpiredError') {
+        return res.status(401).json({ msg: 'Token has expired.' });
+      }
+      if (err.name === 'JsonWebTokenError') {
+        return res.status(401).json({ msg: err.message });
+      }
+      return res.status(401).json({ msg: err.message });
+    }
+  })();
 };
 
-export { verifyToken, createToken }
+export { verifyToken };
