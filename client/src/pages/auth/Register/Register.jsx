@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Grid, Typography, Link } from '@mui/material'
 import authMainImage from '../../../assets/images/loginImg.png'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../../../store/auth/actions'
 import CommonButton from '../../../components/Common/CommonButton'
@@ -12,7 +12,7 @@ const Register = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { status } = useSelector((state) => state.auth.userData)
-
+    const Auth = JSON.parse(localStorage.getItem('Auth'))
     const initialState = {
         cnic: '',
         email: '',
@@ -28,12 +28,15 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(register(createUser))
+        const { email, cnic } = createUser
+        localStorage.setItem('userReg', JSON.stringify({
+            email, cnic
+        }))
     }
 
-    if (status === 201) {
-        navigate('/')
+    if (Auth?.user || status === 201) {
+        return <Navigate to='/profile' />
     }
-
 
     return (
         <Grid container >

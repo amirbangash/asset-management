@@ -1,7 +1,13 @@
-import { registerUser, loginUser } from "../../services/auth"
+import { registerUser, loginUser, userUpdate } from "../../services/auth"
 import { errorToast, successToast } from "../../utilities/toastify"
-import { userAction } from "./actionCreator"
+import { updateUserAction, userAction } from "./actionCreator"
 
+function showErrorToast(data) {
+    console.log('error', data)
+    return data?.Error?.map(el => {
+        return errorToast(el)
+    })
+}
 
 //user register
 export const register = userData => async dispatch => {
@@ -17,9 +23,7 @@ export const register = userData => async dispatch => {
         return res
     } catch (err) {
         const { data, status } = err?.response
-        if (status === 400) {
-            errorToast(data?.error)
-        }
+        showErrorToast(data)
         if (status === 409) {
             errorToast(data?.msg)
         }
@@ -44,6 +48,20 @@ export const login = userData => async dispatch => {
         if (status === 404 || status === 401) {
             errorToast(data?.Error)
         }
+    }
+}
+
+// User Update
+export const updatingUser = userUpdateData => async dispatch => {
+    try {
+        const res = await userUpdate(userUpdateData)
+        const { data } = res
+        dispatch(updateUserAction(data))
+        successToast(data?.msg)
+        return res
+    } catch (err) {
+        const { data, status } = err?.response
+        showErrorToast(data)
     }
 }
 

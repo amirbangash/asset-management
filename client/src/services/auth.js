@@ -9,3 +9,8 @@ export const loginUser = userCredentials => {
 export const registerUser = userData => {
 	return API.post("user/signup", userData)
 }
+
+//update user
+export const userUpdate = updateData => {
+	return API.put("user/create-profile", updateData)
+}
