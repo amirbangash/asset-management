@@ -33,7 +33,6 @@ const Profile = () => {
   const handleLogot = () => {
     setTimeout(() => {
       dispatch(logoutUser())
-      navigate(from, { replace: true })
       navigate('/')
     }, 400)
   }
