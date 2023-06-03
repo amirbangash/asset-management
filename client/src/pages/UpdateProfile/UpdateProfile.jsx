@@ -1,28 +1,40 @@
 import React, { useState } from 'react'
-import { Divider, Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import PageContainer from '../../components/container/PageContainer';
 import DashboardCard from '../../components/shared/DashboardCard';
 import CommonButton from '../../components/Common/CommonButton'
 import CommonTextField from '../../components/Common/CommonTextField'
+import { useDispatch } from 'react-redux';
+import { updatingUser } from '../../store/auth/actions'
 
 const UpdateProfile = () => {
 
+    const dispatch = useDispatch()
+    const getUserInfo = JSON.parse(localStorage.getItem('userReg'))
+    const { cnic, email } = getUserInfo
+
     const initialState = {
-        firstName: null,
-        lastName: null,
-        email: '',
-        cnic: '',
+        firstName: '',
+        lastName: '',
+        email,
+        cnic,
         role: '',
-        phoneNo: null,
-        level: null,
+        phoneNo: '',
+        level: '',
         team: '',
-        organization: null,
-        image: null
+        organization: '',
     }
     const [updateUser, setUserUpdate] = useState(initialState)
+    console.log("🚀 ~ file: UpdateProfile.jsx:25 ~ UpdateProfile ~ updateUser:", updateUser)
 
-    const handleChange = () => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserUpdate({ ...updateUser, [name]: value })
+    }
 
+    const handleUpdateUser = () => {
+        console.log('first')
+        dispatch(updatingUser(updateUser))
     }
 
     return (
@@ -38,11 +50,11 @@ const UpdateProfile = () => {
                         <CommonTextField label='Last Name' name='lastName' value={updateUser.lastName} onChange={handleChange} />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <CommonTextField label='Email Address' type='email' name='email' value={updateUser.email} onChange={handleChange} />
+                        <CommonTextField label='Email Address' name='email' disabled value={email} />
                     </Grid>
 
                     <Grid item xs={12} md={6}>
-                        <CommonTextField label='CNIC' name='cnic' value={updateUser.cnic} onChange={handleChange} />
+                        <CommonTextField disabled label='CNIC' value={cnic} />
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <CommonTextField label='Role' name='role' value={updateUser.role} onChange={handleChange} />
@@ -63,7 +75,7 @@ const UpdateProfile = () => {
 
 
                     <Grid item xs={12} >
-                        <CommonButton fullWidth buttonText='Update Account' />
+                        <CommonButton fullWidth buttonText='Update Account' onClick={handleUpdateUser} />
                     </Grid>
                 </Grid>
             </DashboardCard>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Avatar,
   Box,
@@ -33,9 +33,11 @@ const Profile = () => {
   const handleLogot = () => {
     setTimeout(() => {
       dispatch(logoutUser())
+      navigate(from, { replace: true })
       navigate('/')
-    }, 300)
+    }, 400)
   }
+
 
   return (
     <Box>
