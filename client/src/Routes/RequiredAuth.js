@@ -1,5 +1,5 @@
 import { useLocation, Navigate } from "react-router-dom";
-import BlankLayout from "../layouts/blank/BlankLayout";
+import FullLayout from "../layouts/full/FullLayout";
 
 const RequiredAuth = () => {
     const auth = JSON.parse(localStorage.getItem('Auth'))
@@ -7,7 +7,7 @@ const RequiredAuth = () => {
 
     return (
         auth?.user
-            ? <BlankLayout />
+            ? <FullLayout />
             : <Navigate to='/' state={{ from: location }} replace />
     )
 }

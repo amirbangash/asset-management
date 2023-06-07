@@ -51,7 +51,7 @@ const Menuitems = [
     id: uniqueId(),
     title: 'Register',
     icon: PersonAddAltIcon,
-    href: '/auth/register',
+    href: '/register',
   },
   {
     navlabel: true,

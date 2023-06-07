@@ -31,10 +31,8 @@ const Profile = () => {
   };
 
   const handleLogot = () => {
-    setTimeout(() => {
-      dispatch(logoutUser())
-      navigate('/')
-    }, 400)
+    dispatch(logoutUser())
+    navigate('/')
   }
 
 
@@ -79,7 +77,7 @@ const Profile = () => {
           },
         }}
       >
-        <MenuItem>
+        <MenuItem onClick={() => navigate('/my-profile')}>
           <ListItemIcon>
             <AccountCircleOutlinedIcon width={20} />
           </ListItemIcon>

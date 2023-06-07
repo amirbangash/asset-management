@@ -15,6 +15,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/'
     const isLogin = useSelector((state) => state.auth.userData)
     const isAuth = JSON.parse(localStorage.getItem('Auth'))
+    console.log("🚀 ~ file: Login.jsx:18 ~ Login ~ isAuth:", isAuth)
 
     const [userCreds, setUserCreds] = useState({
         email: '',
