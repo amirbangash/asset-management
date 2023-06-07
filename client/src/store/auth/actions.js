@@ -2,8 +2,7 @@ import { registerUser, loginUser, userUpdate } from "../../services/auth"
 import { errorToast, successToast } from "../../utilities/toastify"
 import { updateUserAction, userAction } from "./actionCreator"
 
-function showErrorToast(data) {
-    console.log('error', data)
+function showToast(data) {
     return data?.Error?.map(el => {
         return errorToast(el)
     })
@@ -23,7 +22,7 @@ export const register = userData => async dispatch => {
         return res
     } catch (err) {
         const { data, status } = err?.response
-        showErrorToast(data)
+        showToast(data)
         if (status === 409) {
             errorToast(data?.msg)
         }
@@ -61,15 +60,13 @@ export const updatingUser = userUpdateData => async dispatch => {
         return res
     } catch (err) {
         const { data, status } = err?.response
-        showErrorToast(data)
+        showToast(data)
     }
 }
 
 //main user logout
 export const logoutUser = () => dispatch => {
-    setTimeout(() => {
-        dispatch(userAction({}))
-        localStorage.removeItem("Auth");
-    }, 300)
+    dispatch(userAction({}))
+    localStorage.removeItem("Auth");
     successToast('User Logout')
 }

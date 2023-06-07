@@ -6,7 +6,6 @@ import CommonButton from '../../../components/Common/CommonButton'
 
 // components
 import Profile from './Profile';
-// import { IconBellRinging, IconMenu } from '@mui/icons-material';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 
