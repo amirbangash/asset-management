@@ -1,18 +1,15 @@
 import express, { response } from 'express';
 import bodyParser from 'body-parser';
 
-import {
-    findUser, register, completeProfile,
-    getAllUser, updatePassword,
-} from '../services/user.js';
+
+import userServices from '../services/user.js'
 
 async function userRegistation(req, res) {
     try {
         const { body } = req;
         const { email } = body
-        const user = await register(body)
-        return res.status(user.statusCode)
-            .json({ msg: user.message, user: user.userData, error: user.errMessage });
+        const user = await userServices.userRegistation(body)
+        return res.status(user.statusCode).json({ msg: user.message });
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }
@@ -20,7 +17,7 @@ async function userRegistation(req, res) {
 async function createUserProfile(req, res) {
     try {
         const { body } = req;
-        const user = await completeProfile(body);
+        const user = await userServices.createUserProfile(body);
         return res.status(user.statusCode)
             .json({ msg: user.message, user: user.userData, error: user.errMessage });
     } catch (error) {
@@ -32,23 +29,14 @@ async function userLogin(req, res) {
     try {
 
         const { body } = req;
-        const user = await findUser(body);
+        const user = await userServices.userLogin(body);
         return res.status(user.statusCode)
             .json({ userRecord: user.userData, token: user.token, Error: user.errMessage });
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }
 };
-// async function updateUserProfile(req, res) {
-//     try {
-//         const { body } = req;
-//         const user = await updateUser(body);
-//         return res.status(user.statusCode)
-//             .json({ userRecord: user.userData, token: user.token, Error: user.errMessage });
-//     } catch (error) {
-//         return res.status(400).json({ error: error.message });
-//     }
-// }
+
 
 async function updateUserPassword(req, res) {
     try {
@@ -56,7 +44,7 @@ async function updateUserPassword(req, res) {
         const { id } = req.user;
         console.log("user id is ", id)
         const { newPassword, confirm } = req.body
-        const user = await updatePassword(body, id)
+        const user = await userServices.updateUserPassword(body, id)
         console.log("in controllers user is", user)
         return res.status(user.statusCode)
             .json({ userRecord: user.userData, message: user.message, error: user.errMessage });
@@ -66,6 +54,20 @@ async function updateUserPassword(req, res) {
     }
 
 }
+
+
+async function seeAllUser(req, res) {
+    try {
+        const userType = req.user.role
+        const { page, limit } = req.query
+        const user = await userServices.seeAllUser(userType, page, limit)
+        return res.status(user.statusCode)
+            .json({ userRecord: user.userData, token: user.token, Error: user.errMessage });
+    } catch (error) {
+        return res.status(400).json({ error: error.message });
+    }
+}
+
 // async function UserForgetPassword(req, res) {
 //     try {
 //         const { id } = req.user;
@@ -92,19 +94,17 @@ async function updateUserPassword(req, res) {
 //         return res.status(400).json({ error: error.message });
 //     }
 // }
-
-async function seeAllUser(req, res) {
-    try {
-        const userType = req.user.role
-        const { page, limit } = req.query
-        const user = await getAllUser(userType, page, limit)
-        return res.status(user.statusCode)
-            .json({ userRecord: user.userData, token: user.token, Error: user.errMessage });
-    } catch (error) {
-        return res.status(400).json({ error: error.message });
-    }
-}
-export {
+// async function updateUserProfile(req, res) {
+//     try {
+//         const { body } = req;
+//         const user = await updateUser(body);
+//         return res.status(user.statusCode)
+//             .json({ userRecord: user.userData, token: user.token, Error: user.errMessage });
+//     } catch (error) {
+//         return res.status(400).json({ error: error.message });
+//     }
+// }
+export default {
     userRegistation, userLogin, createUserProfile,
     updateUserPassword, seeAllUser
 };

@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 
 import { User } from '../model/user.js'
-import { create, profileCompletion, find, userUpdate, allUsers, passwordUpdate } from '../repo/user.js';
 import { createToken } from '../utils/token.js';
 
 dotenv.config();
@@ -11,30 +10,26 @@ const { secretKey } = process.env;
 
 
 
-async function register(body) {
+async function userRegistation(body) {
     try {
-        // console.log("in services")
         const { password, email } = body;
-        const checkUser = await find(email);
+        const checkUser = await User.findOne({ email }).lean()
         if (checkUser) {
             return { statusCode: 409, message: 'User Already Exist' };
         }
         const hash = await bcrypt.hash(password, 10);
         body.password = hash;
-        const user = await create(body);
-        const data = {
-            email: user.email,
-            cnic: user.cnic,
-        }
-        return { statusCode: 201, userData: data, message: 'User Registered Successfully' };
+        const user = await User.create(body);
+        return { statusCode: 201, message: 'User Registered Successfully' };
     } catch (error) {
+        console.log("we have an error in services", error.message)
         throw new Error(error.message);
     }
 }
-async function findUser(body) {
+async function userLogin(body) {
     try {
         const { email, password } = body;
-        const user = await find(email);
+        const user = await User.findOne({ email }).lean()
         if (!user) {
             return { statusCode: 404, errMessage: 'User does not exist' }
         }
@@ -58,16 +53,16 @@ async function findUser(body) {
 }
 
 
-async function completeProfile(body) {
+async function createUserProfile(body) {
     try {
         const { email } = body
 
         // const user = await User.updateOne({ email }, { new: true })
-        const isUser = await find(email);
+        const isUser = await User.findOne({ email }).lean()
         if (!isUser) {
             return { statusCode: 404, errMessage: 'User does not exist' }
         }
-        const user = await profileCompletion(body)
+        const user = await User.findOneAndUpdate({ email }, body, { new: true }).lean()
         delete user.password
         return { statusCode: 201, userData: user, message: 'User Profile Created' }
     } catch (error) {
@@ -75,29 +70,26 @@ async function completeProfile(body) {
     }
 }
 
-async function getAllUser(userType, page, limit) {
+async function seeAllUser(userType, skip, limit) {
+
     try {
         if (userType !== 'admin') {
             return { statusCode: 404, errMessage: 'You Are Not Authorized' };
         }
-        const users = await allUsers(page, limit)
-        return { statusCode: 200, userData: users }
+        const user = await User.aggregate([
+            { $project: { password: 0 } },
+            { $skip: parseInt(skip) },
+            { $limit: parseInt(limit) },
+
+        ]);
+        return { statusCode: 200, userData: user }
     } catch (error) {
         throw error;
     }
 }
 
-// async function updateUser(body) {
 
-//     try {
-//         const user = userUpdate(body)
-//         return { statusCode: 201, userData: user }
-//     } catch (error) {
-//         throw error;
-//     }
-// }
-
-async function updatePassword(body, id) {
+async function updateUserPassword(body, id) {
     try {
         var { newPassword, confirm } = body
         if (newPassword !== confirm) {
@@ -112,7 +104,7 @@ async function updatePassword(body, id) {
         }
         newPassword = await bcrypt.hash(newPassword, 10)
         const update = { password: newPassword };;
-        const user = await passwordUpdate(id, update);
+        const user = await User.updateOne({ _id: id }, update)
         console.log("in serv user is", user)
         return { statusCode: 201, message: 'Password Updated ' }
     } catch (error) {
@@ -123,7 +115,7 @@ async function updatePassword(body, id) {
 
 
 
-export { register, findUser, getAllUser, updatePassword, completeProfile };
+export default { userRegistation, userRegistation, createUserProfile, userLogin, updateUserPassword, seeAllUser }
 
 
 // async function logoutUser(token) {
