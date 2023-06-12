@@ -12,7 +12,3 @@ a {
 img {
     pointer-events: none;
 }
-
-.MuiTextField-root {
-    overflow: initial;
-}
