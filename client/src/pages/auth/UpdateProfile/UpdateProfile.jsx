@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
 import { Grid } from '@mui/material';
-import PageContainer from '../../components/container/PageContainer';
-import DashboardCard from '../../components/shared/DashboardCard';
-import CommonButton from '../../components/Common/CommonButton'
-import CommonTextField from '../../components/Common/CommonTextField'
-import { useDispatch } from 'react-redux';
-import { updatingUser } from '../../store/auth/actions'
+import PageContainer from '../../../components/container/PageContainer';
+import DashboardCard from '../../../components/shared/DashboardCard';
+import CommonButton from '../../../components/Common/CommonButton'
+import CommonTextField from '../../../components/Common/CommonTextField'
+import { useDispatch, useSelector } from 'react-redux';
+import { updatingUser } from '../../../store/auth/actions'
 
 const UpdateProfile = () => {
 
     const dispatch = useDispatch()
     const getUserInfo = JSON.parse(localStorage.getItem('userReg'))
     const { cnic, email } = getUserInfo
+    const getUser = useSelector((state) => state.auth.userData)
+    console.log("🚀 ~ file: UpdateProfile.jsx:16 ~ UpdateProfile ~ getUser:", getUser)
 
     const initialState = {
         firstName: '',
@@ -25,7 +27,6 @@ const UpdateProfile = () => {
         organization: '',
     }
     const [updateUser, setUserUpdate] = useState(initialState)
-    console.log("🚀 ~ file: UpdateProfile.jsx:25 ~ UpdateProfile ~ updateUser:", updateUser)
 
     const handleChange = (e) => {
         const { name, value } = e.target;

@@ -1,38 +1,36 @@
 import React from 'react'
-import { Routes, Route, useNavigate } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import Login from '../pages/auth/Login/Login'
 import Register from '../pages/auth/Register/Register'
 import Dashboard from '../pages/dashboard/Dashboard'
-import ForgotPassword from '../pages/PageNotFound/PageNotFound'
+import ForgotPassword from '../pages/auth/ForgotPassword/ForgotPassword'
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
-// import Layout from './Layout'
 import RequiredAuth from './RequiredAuth'
-import FullLayout from '../layouts/full/FullLayout'
 import BlankLayout from '../layouts/blank/BlankLayout'
 import SamplePage from '../pages/sample-page/SamplePage'
-import UpdateProfile from '../pages/UpdateProfile/UpdateProfile'
+import UpdateProfile from '../pages/auth/UpdateProfile/UpdateProfile'
+import ProfilePage from '../pages/profile-page/ProfilePage'
 
 
 const RoutesPage = () => {
 
     const auth = JSON.parse(localStorage.getItem('Auth'))
 
-
     return (
         <Routes>
-            <Route path='/' element={auth?.user ? <FullLayout /> : <BlankLayout />} >
+            <Route path='/' element={<BlankLayout />} >
 
                 {/* Public Routes */}
                 <Route path="/" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="reset-password" element={<ForgotPassword />} />
-                {/* <Route path="test" element={<Test />} /> */}
 
                 {/* Protected Routes */}
                 <Route element={<RequiredAuth />} >
                     <Route path="dashboard" element={<Dashboard />} />
                     <Route path="sample-page" element={<SamplePage />} />
                     <Route path="profile" element={<UpdateProfile />} />
+                    <Route path='my-profile' element={<ProfilePage />} />
                 </Route>
 
                 {/* Catch All */}
