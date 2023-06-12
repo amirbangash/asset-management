@@ -11,8 +11,8 @@ const assetSchema = new mongoose.Schema({
   itemDescription: {
     type: String,
   },
-  status: {
-    type: String,
+  inStock: {
+    type: Boolean
   },
   opeSys: {
     type: String,

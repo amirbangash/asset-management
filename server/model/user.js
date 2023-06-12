@@ -1,16 +1,8 @@
 import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
-  firstName: {
+  name: {
     type: String,
-    // required: true,
-    default: null,
-    match: /^[a-zA-Z0-9_-]{3,16}$/
-
-  },
-  lastName: {
-    type: String,
-    default: null,
-    // required: true,
+    required: true,
     match: /^[a-zA-Z0-9_-]{3,16}$/
 
   },

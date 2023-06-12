@@ -1,55 +1,63 @@
 import express from 'express';
-import {
-  createAsset,
-  getExpired,
-  expiring,
-  getassetbylocation,
-  getAssetbystatus,
-  stock,
-} from '../services/assetservices.js';
+import assetService from '../services/asset.js';
 
 const assetRouter = express.Router();
 
-assetRouter.post('/create-asset', async (req, res) => {
+async function createAsset(req, res) {
   try {
     const { body } = req;
-    console.log(body);
-    const response = await createAsset(body);
-    res.send(response);
+    console.log("name is", body.name)
+    const asset = await assetService.createAsset(body);
+    return res.status(asset.statusCode)
+      .json({ msg: asset.message, asset: asset.asset, error: asset.errMessage });
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
-});
+}
 
-assetRouter.get('/getassetbylocation/:location', async (req, res) => {
+async function findAssetByStatus(req, res) {
   try {
-    const { location } = req.params;
-    const response = await getassetbylocation(location);
-    res.send(response);
+    const { status } = req.params;
+    const asset = await assetService.findAssetbyStatus(status);
+    console.log("asset", asset)
+    return res.status(asset.statusCode)
+      .json({ msg: asset.message, asset: asset.assetData, error: asset.errMessage });
   } catch (error) {
-    return res.status(404).json({ error: error.message });
+    console.log(error.message)
+    return res.status(400).json({ error: error.message });
   }
-});
+}
 
-assetRouter.get('/getassetbystatus/:status', async (req, res) => {
-  const { status } = req.params;
-  const response = await getAssetbystatus(status);
-  res.send(response);
-});
-
-assetRouter.get('/assets/expired', async (req, res) => {
-  const response = await getExpired();
-  res.send(response);
-});
-
-assetRouter.get('/expiringsoon', async (req, res) => {
-  const response = await expiring();
-  res.send(response);
-});
-
-assetRouter.get('/stock', async (req, res) => {
-  const response = await stock();
-  res.send(response);
-});
-
-export default assetRouter;
+async function findExpiredAsset(req, res) {
+  try {
+    const { body } = req;
+    const asset = await assetService.findExpiredAsset(body);
+    return res.status(user.statusCode)
+      .json({ msg: user.message, user: user.userData, error: user.errMessage });
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+}
+async function findExpiringAsset(req, res) {
+  try {
+    const { body } = req;
+    const asset = await assetService.findExpiringAsset(body);
+    return res.status(user.statusCode)
+      .json({ msg: user.message, user: user.userData, error: user.errMessage });
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+}
+async function findAssetInStock(req, res) {
+  try {
+    const { body } = req;
+    const asset = await assetService.findAssetInStock(body);
+    return res.status(user.statusCode)
+      .json({ msg: user.message, user: user.userData, error: user.errMessage });
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+}
+export default {
+  createAsset, findAssetByStatus, findExpiredAsset, findExpiringAsset, findAssetInStock
+}

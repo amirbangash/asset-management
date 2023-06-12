@@ -1,19 +1,17 @@
+
 import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
-import fs from 'fs';
+import fs from 'fs'
 import csv from 'csv-parser';
-
-config();
 
 function createToken(user) {
     const token = jwt.sign(
         { email: user.email, id: user._id, role: user.role },
         process.env.TOKEN_KEY,
-        { expiresIn: '8h' },
+        { expiresIn: '72h' },
     );
-    return token;
+    return token
 }
-
 const filePath = 'token.csv';
 
 function blacklistToken(token) {
@@ -40,4 +38,4 @@ function getBlacklistedToken() {
     });
 }
 
-export { createToken, blacklistToken, getBlacklistedToken };
+export { createToken, blacklistToken, getBlacklistedToken }

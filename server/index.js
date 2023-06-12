@@ -6,16 +6,17 @@ import bodyParser from 'body-parser';
 import { METHODS } from 'http';
 import dotenv from 'dotenv';
 
+import connect from './config/database.js'
 
 import userRouter from './routes/user.js';
-// import assetRouter from './routes/asset.js';
+import assetRouter from './routes/asset.js';
 // import trackingRouter from './routes/tracking.js';
 
 dotenv.config();
 mongoose.set('strictQuery', true);
 const app = express();
 app.use(bodyParser.json());
-mongoose.connect('mongodb://0.0.0.0/company');
+mongoose.connect(process.env.MONGOURI);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({
@@ -23,8 +24,11 @@ app.use(cors({
     METHODS: "GET, POST, PUT, PATCH, DELETE"
 }));
 app.use('/user', userRouter);
-// app.use('/asset', assetRouter);
+app.use('/asset', assetRouter);
 // app.use('/tracking', trackingRouter);
+app.all('*', (req, res) => {
+    res.status(404).send('404! Page not found');
+});
 app.all('*', (req, res) => {
     res.status(404).send('404! Page not found');
 });
