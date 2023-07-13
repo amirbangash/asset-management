@@ -10,13 +10,15 @@ import RecentTransactions from './components/RecentTransactions';
 import ProductPerformance from './components/ProductPerformance';
 import Blog from './components/Blog';
 import MonthlyEarnings from './components/MonthlyEarnings';
+import CreateAsset from '../asset/CreateAsset';
 
 const Dashboard = () => {
     return (
         <PageContainer title="Dashboard" description="this is Dashboard">
             <Box>
+                <CreateAsset />
                 <Grid container spacing={3}>
-                    <Grid item xs={12} lg={8}>
+                    {/* <Grid item xs={12} lg={8}>
                         <SalesOverview />
                     </Grid>
                     <Grid item xs={12} lg={4}>
@@ -28,16 +30,16 @@ const Dashboard = () => {
                                 <MonthlyEarnings />
                             </Grid>
                         </Grid>
-                    </Grid>
+                    </Grid> 
                     <Grid item xs={12} lg={4}>
                         <RecentTransactions />
-                    </Grid>
-                    <Grid item xs={12} lg={8}>
+                    </Grid>*/}
+                    <Grid item xs={12} lg={12}>
                         <ProductPerformance />
                     </Grid>
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <Blog />
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </Box>
         </PageContainer>

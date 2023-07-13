@@ -17,11 +17,13 @@ const PageNotFound = () => {
                 </Typography>
                 <ErrorPageLogo />
                 <Link to='/'>
-                    <CommonButton fullWidth={false} color='primary' buttonText='Go to Home' />
+                    <CommonButton fullWidth={false} color='primary'  >Back to Home</CommonButton>
                 </Link>
             </Box>
         </Box>
     )
 }
+
+
 
 export default PageNotFound

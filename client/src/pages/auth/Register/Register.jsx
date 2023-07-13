@@ -67,7 +67,7 @@ const Register = () => {
                         <CommonTextField label='Password' type='password' name='password' value={createUser.password} onChange={handleChange} />
                     </Grid>
                     <Grid item xs={12}>
-                        <CommonButton fullWidth={true} buttonText='Create Account' />
+                        <CommonButton fullWidth={true} >Create Account</CommonButton>
                     </Grid>
                 </Grid>
             </Grid>
