@@ -96,7 +96,7 @@ const Profile = () => {
           <ListItemText>My Tasks</ListItemText>
         </MenuItem>
         <Box mt={1} py={1} px={2}>
-          <Button variant="outlined" color="primary" component={Link} fullWidth onClick={handleLogot}>
+          <Button variant="outlined" color="error" component={Link} fullWidth onClick={handleLogot}>
             Logout
           </Button>
         </Box>

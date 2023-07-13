@@ -1,0 +1,1 @@
+export const HANDLE_DIALOG = 'HANDLE_DIALOG'

@@ -1,7 +1,7 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 
-const CommonTextField = ({ label, name, type, color, fullWidth, value, disabled, onChange }) => {
+const CommonTextField = ({ label, name, type, color, fullWidth, value, disabled, onBlur, onChange }) => {
     return (
         <TextField
             label={label || 'Label'}
@@ -11,6 +11,7 @@ const CommonTextField = ({ label, name, type, color, fullWidth, value, disabled,
             fullWidth={fullWidth || true}
             value={value}
             disabled={disabled}
+            onBlur={onBlur}
             onChange={onChange}
         />
     )

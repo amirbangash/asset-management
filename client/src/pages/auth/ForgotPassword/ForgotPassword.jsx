@@ -19,9 +19,9 @@ const ForgotPassword = () => {
                     Please enter the email address associated with your account and We will email you a link to reset your password.
                 </Typography>
                 <CommonTextField label='Email address' />
-                <CommonButton fullWidth={true} buttonText='Send Request' color='primary' />
+                <CommonButton fullWidth={true} color='primary' >Send Request</CommonButton>
                 <Link to='/'>
-                    <CommonButton color='Dark' size='small' variant='text' startIcon={<ChevronLeftIcon />} buttonText={'Return to sign in'} />
+                    <CommonButton color='Dark' size='small' variant='text' startIcon={<ChevronLeftIcon />} >Return to sign in</CommonButton>
                 </Link>
             </Box>
         </Box>

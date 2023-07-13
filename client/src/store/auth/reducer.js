@@ -10,9 +10,9 @@ export const authReduer = (state = initialState, action) => {
 			return {
 				...state,
 				userData: {
-					...state?.userData,
+					...state.userData,
 					user: {
-						...action?.payload,
+						...action.payload,
 					},
 				},
 			}

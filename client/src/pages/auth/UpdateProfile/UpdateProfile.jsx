@@ -76,7 +76,7 @@ const UpdateProfile = () => {
 
 
                     <Grid item xs={12} >
-                        <CommonButton fullWidth buttonText='Update Account' onClick={handleUpdateUser} />
+                        <CommonButton fullWidth onClick={handleUpdateUser} >Update Account</CommonButton>
                     </Grid>
                 </Grid>
             </DashboardCard>

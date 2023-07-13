@@ -2,19 +2,16 @@ import React from 'react';
 import { Box, AppBar, Toolbar, styled, Stack, IconButton, Badge } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import PropTypes from 'prop-types';
-import CommonButton from '../../../components/Common/CommonButton'
-
-// components
 import Profile from './Profile';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
+import CommonButton from '../../../components/Common/CommonButton'
+import { useDispatch } from 'react-redux'
+import { dialogAction } from '../../../store/uiState/action';
 
 const Header = (props) => {
 
-  // const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
-  // const lgDown = useMediaQuery((theme) => theme.breakpoints.down('lg'));
-
-
+  const dispatch = useDispatch()
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
     boxShadow: 'none',
     background: theme.palette.background.paper,
@@ -28,6 +25,10 @@ const Header = (props) => {
     width: '100%',
     color: theme.palette.text.secondary,
   }));
+
+  const handleAssetDialog = () => {
+    dispatch(dialogAction(true))
+  }
 
   return (
     <AppBarStyled position="sticky" color="default">
@@ -67,7 +68,7 @@ const Header = (props) => {
         </IconButton>
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
-          <CommonButton variant="contained" size='small' color="primary" buttonText='Create Asset' startIcon={<AddIcon />} />
+          <CommonButton variant="contained" size='small' color="primary" startIcon={<AddIcon />} onClick={handleAssetDialog}>Create Asset</CommonButton>
           <Profile />
         </Stack>
       </ToolbarStyled>

@@ -73,7 +73,7 @@ const Login = () => {
                         </Link>
                     </Grid>
                     <Grid item xs={12}>
-                        <CommonButton fullWidth={true} buttonText='Login' />
+                        <CommonButton fullWidth={true} >Login</CommonButton>
                     </Grid>
                 </Grid>
             </Grid>
